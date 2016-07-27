@@ -30,7 +30,7 @@
         padding: 0.5%;
       }
       .img-box{
-        width: 24.6%;
+        width: 25%;
         box-sizing: border-box;
         padding: 0.25% 0.5%;
         /*margin: 0 auto;*/
@@ -82,21 +82,21 @@
       var img = document.getElementsByClassName('img-box');
       for(i =0;i<img.length;i++){
         img[i].addEventListener('click',function(e){
-          var other = document.getElementsByClassName('img-box');
-          for(i =0;i<other.length;i++){
-            other[i].style.width= '25%';
-          }
+          closeAll();
           this.style.width= '100%';
         },false);
       }
       document.body.addEventListener('click', function(e){
         if(e.target.className!='img-box'){
-          var other = document.getElementsByClassName('img-box');
-          for(i =0;i<other.length;i++){
-            other[i].style.width= '25%';
-          }
+          closeAll();
         }
       },false);
+      function closeAll(){
+        var other = document.getElementsByClassName('img-box');
+        for(i =0;i<other.length;i++){
+          other[i].style.width= '25%';
+        }
+      }
     </script>
   </body>
 </html>
