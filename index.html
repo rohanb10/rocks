@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pictures of Michael climbing rocks and stuff</title>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:800" rel="stylesheet">
+    <style>
+      body,html{
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #F3F3F3;
+        overflow-y: scroll;
+      }
+      header {
+        font-family: 'Catamaran', sans-serif;
+        font-size: 3em;
+      }
+      footer, header{
+        text-align: center;
+        width:100vw;
+      }
+      footer{
+        color: #8A8A8F;
+        font-size: 0.7em;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0.5%;
+      }
+      .img-box{
+        width: 24.6%;
+        box-sizing: border-box;
+        padding: 0.25% 0.5%;
+        /*margin: 0 auto;*/
+        text-align: center;
+      }
+      @media only screen and (max-width :801px) {
+        .container {
+          width: 96%;
+        }
+        .img-box{
+          padding: 0.1% 0.5%;
+          width: 25%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      Happy Birthday Mike
+    </header>
+    <div class="container">
+    </div>
+    <footer>
+      <p>This website is sponsored by Amazon&trade; Mechanical Turk</p>
+      <p>Proudly hosted in Simsbury, CT</p>
+    </footer>
+    <script>
+      function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+      }
+      const numberOfPictures = 33;
+      var pictures = []
+      for(i=1;i<=numberOfPictures;i++){
+        pictures.push('<img class="img-box" src="img/'+i+'.jpg" />');
+      }
+      pictures = shuffle(pictures);
+      var c = document.getElementsByClassName('container')[0];
+      for(i=0;i<pictures.length;i++){
+        c.innerHTML+=pictures[i];
+      }
+      var img = document.getElementsByClassName('img-box');
+      for(i =0;i<img.length;i++){
+        img[i].addEventListener('click',function(e){
+          var other = document.getElementsByClassName('img-box');
+          for(i =0;i<other.length;i++){
+            other[i].style.width= '25%';
+          }
+          this.style.width= '100%';
+        },false);
+      }
+      document.body.addEventListener('click', function(e){
+        if(e.target.className!='img-box'){
+          var other = document.getElementsByClassName('img-box');
+          for(i =0;i<other.length;i++){
+            other[i].style.width= '25%';
+          }
+        }
+      },false);
+    </script>
+  </body>
+</html>
