@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Turnstyle</title>
+  </head>
+  <body>
+    <div id="error"></div>
+    <script>
+      function getParams(){
+        console.log(window.location.search.substring(1));
+        return window.location.search.substring(1);
+      }
+      function redirectToTicket(){
+        var ios = /iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase());
+        var ticketId = getParams();
+        if(ios){
+          document.getElementById('error').innerHTML = ticketId;
+          //window.location()
+        }
+        else{
+          document.getElementById('error').innerHTML = 'Please open this URL on your iPhone';
+        }
+      }
+      redirectToTicket();
+    </script>
+
+  </body>
+</html>
