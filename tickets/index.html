@@ -7,23 +7,14 @@
   <body>
     <div id="error"></div>
     <script>
-      function getParams(){
-        console.log(window.location.search.substring(1));
-        return window.location.search.substring(1);
+      var ticketId = window.location.search.substring(1);
+      console.log(ticketId);
+      if(/iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase())){
+        window.location("turnstyle://ticketId/"+ticketId);
       }
-      function redirectToTicket(){
-        var ios = /iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase());
-        var ticketId = getParams();
-        if(ios){
-          document.getElementById('error').innerHTML = ticketId;
-          //window.location()
-        }
-        else{
-          document.getElementById('error').innerHTML = 'Please open this URL on your iPhone';
-        }
+      else{
+        document.getElementById('error').innerHTML = 'Please open this URL on your iPhone';
       }
-      redirectToTicket();
     </script>
-
   </body>
 </html>
