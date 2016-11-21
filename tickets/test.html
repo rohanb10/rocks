@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" id="input1" placeholder="Ticket ID"/>
+    <button onClick="sendID">Create test ticketID</button>
+    <script>
+      function sendID(){
+        var ticketId = document.getElementById('input1').value;
+        window.location = "turnstyle://ticketId/"+ticketId;
+      }
+    </script>
+  </body>
+</html>
