@@ -10,7 +10,7 @@
       var ticketId = window.location.search.substring(1);
       console.log(ticketId);
       if(/iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase())){
-        window.location = "turnstyle://ticketId/"+ticketId;
+        window.location = "turnstyle://eventId/"+ticketId;
       }
       else{
         document.getElementById('error').innerHTML = 'Please open this URL on your iPhone';
