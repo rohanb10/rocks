@@ -2,17 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Turnstyle.test</title>
+
   </head>
   <body>
-    <input type="text" id="input1" placeholder="Ticket ID"/>
-    <button onClick="sendID">Create test ticketID</button>
+    <input type="text" id="input1" placeholder="Event ID"/>
+    <button onClick="sendID()">Create test event url</button>
     <div id="testurl"></div>
     <script>
       function sendID(){
-        var ticketId = document.getElementById('input1').value;
-        // window.location = "turnstyle://ticketId/"+ticketId;
-        document.getElementById('testurl').innerHTML = "<a href='turnstyle://ticketId/"+ticketId+"'>"+ticketId+"</a>";
+        var eventId = document.getElementById('input1').value;
+        console.log("<a href='turnstyle://eventId/"+eventId+"'>"+eventId+"</a>");
+        // window.location = "turnstyle://eventId/"+eventId;
+        document.getElementById('testurl').innerHTML = "<a href='turnstyle://eventId/"+eventId+"'>"+eventId+"</a>";
       }
     </script>
   </body>
