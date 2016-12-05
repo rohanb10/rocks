@@ -7,10 +7,12 @@
   <body>
     <input type="text" id="input1" placeholder="Ticket ID"/>
     <button onClick="sendID">Create test ticketID</button>
+    <div id="testurl"></div>
     <script>
       function sendID(){
         var ticketId = document.getElementById('input1').value;
-        window.location = "turnstyle://ticketId/"+ticketId;
+        // window.location = "turnstyle://ticketId/"+ticketId;
+        document.getElementById('testurl').innerHTML = "<a href='turnstyle://ticketId/"+ticketId+"'></a>";
       }
     </script>
   </body>
