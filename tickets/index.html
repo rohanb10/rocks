@@ -2,15 +2,46 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Turnstyle</title>
   </head>
   <body>
+    <p>Redirecting to ticket...</p>
     <div id="error"></div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+
     <script>
-      var ticketId = window.location.search.substring(1);
-      console.log(ticketId);
       if(/iphone|ipod|ipad/.test(window.navigator.userAgent.toLowerCase())){
-        window.location = "turnstyle://eventId/"+ticketId;
+        var ticketId = window.location.search.substring(1);
+        var config = {
+          apiKey: "AIzaSyDVCvKPLQ-StR-2YZJhMPi4M0PoxloXtxU",
+          authDomain: "turnstyle-192f3.firebaseapp.com",
+          databaseURL: "https://turnstyle-192f3.firebaseio.com",
+          storageBucket: "turnstyle-192f3.appspot.com",
+          messagingSenderId: "144625970583"
+        };
+        firebase.initializeApp(config);
+        var fire = firebase.database().ref().child("events");
+        fire.on("value", function(snapshot) {
+          var fireChildren = snapshot.val();
+          let events = Object.keys(fireChildren);
+          if(events.indexOf(ticketId)<0){
+            document.getElementById('error').innerHTML = 'Stop modifying the URL. This event doesnt exist';
+            return;
+          }
+          let event = fireChildren[ticketId];
+          console.log(event);
+          if(new Date(new Date().getTime() + 24 * 60 * 60 * 1000) > new Date(event.eventDate)){
+            document.getElementById('error').innerHTML = 'Party over';
+            return;
+          }
+          if(event.ticketsLeft <= 0){
+            document.getElementById('error').innerHTML = 'SOLD OUT';
+            return;
+          }
+          document.getElementById('error').innerHTML = 'Tickets left: '+ event.ticketsLeft;
+          window.location = "turnstyle://eventId/"+ticketId;
+        });
       }
       else{
         document.getElementById('error').innerHTML = 'Please open this URL on your iPhone';
