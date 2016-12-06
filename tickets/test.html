@@ -7,16 +7,25 @@
 
   </head>
   <body>
-    <input type="text" id="input1" placeholder="Event ID"/>
-    <button onClick="sendID()">Create test event url</button>
     <div id="testurl"></div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
     <script>
-      function sendID(){
-        var eventId = document.getElementById('input1').value;
-        console.log("<a href='turnstyle://eventId/"+eventId+"'>"+eventId+"</a>");
-        // window.location = "turnstyle://eventId/"+eventId;
-        document.getElementById('testurl').innerHTML = "<a href='turnstyle://eventId/"+eventId+"'>"+eventId+"</a>";
-      }
+      var config = {
+        apiKey: "AIzaSyDVCvKPLQ-StR-2YZJhMPi4M0PoxloXtxU",
+        authDomain: "turnstyle-192f3.firebaseapp.com",
+        databaseURL: "https://turnstyle-192f3.firebaseio.com",
+        storageBucket: "turnstyle-192f3.appspot.com",
+        messagingSenderId: "144625970583"
+      };
+      firebase.initializeApp(config);
+      var fire = firebase.database().ref().child("events");
+      fire.on("value", function(snapshot) {
+        var fireChildren = snapshot.val();
+        for(event in fireChildren){
+          console.log(fireChildren[event].name)
+          document.getElementById('testurl').innerHTML += "<p><a href='turnstyle://eventId/"+event+"'>"+fireChildren[event].name+" - "+fireChildren[event].host+" - "+fireChildren[event].ticketsLeft+"</a></p>";
+        }
+      });
     </script>
   </body>
 </html>
