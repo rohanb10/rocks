@@ -26,8 +26,10 @@
         fire.on("value", function(snapshot) {
           var fireChildren = snapshot.val();
           for(event in fireChildren){
+            fireChildren[event].attendedList = [];
             fireChildren[event].attendedList.push("fireChildren[event].hostId");
             console.log(fireChildren[event]);
+            firebase.database().ref().child("events").child(event).update(fireChildren[event]);
           }
         });
       }
