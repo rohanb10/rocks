@@ -21,6 +21,7 @@
       var fire = firebase.database().ref().child("events");
       fire.on("value", function(snapshot) {
         var fireChildren = snapshot.val();
+        document.getElementById('testurl').innerHTML = ""
         for(event in fireChildren){
           console.log(fireChildren[event].name)
           document.getElementById('testurl').innerHTML += "<p><a href='turnstyle://eventId/"+event+"'>"+fireChildren[event].name+" - "+fireChildren[event].host+" - "+fireChildren[event].ticketsLeft+"</a></p>";
