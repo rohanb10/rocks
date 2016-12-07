@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Turnstyle.test</title>
+
+  </head>
+  <body>
+    <div id="testurl"></div>
+    <div>
+      <button onclick="test()">Test this shit</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script>
+      function test(){
+        var config = {
+          apiKey: "AIzaSyDVCvKPLQ-StR-2YZJhMPi4M0PoxloXtxU",
+          authDomain: "turnstyle-192f3.firebaseapp.com",
+          databaseURL: "https://turnstyle-192f3.firebaseio.com",
+          storageBucket: "turnstyle-192f3.appspot.com",
+          messagingSenderId: "144625970583"
+        };
+        firebase.initializeApp(config);
+        var fire = firebase.database().ref().child("events");
+        fire.on("value", function(snapshot) {
+          var fireChildren = snapshot.val();
+          for(event in fireChildren){
+            fireChildren[event].attendedList.push("fireChildren[event].hostId");
+            console.log(fireChildren[event]);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
