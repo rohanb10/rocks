@@ -2,12 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <title>Turnstyle.test</title>
-
+    <style>
+      table,th,td,tr{
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
-    <div id="testurl"></div>
+    <table id="ticketTable"></table>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
     <script>
       var config = {
@@ -21,10 +25,16 @@
       var fire = firebase.database().ref().child("events");
       fire.on("value", function(snapshot) {
         var fireChildren = snapshot.val();
-        document.getElementById('testurl').innerHTML = ""
+        document.getElementById('ticketTable').innerHTML = ""
         for(event in fireChildren){
-          console.log(fireChildren[event].name)
-          document.getElementById('testurl').innerHTML += "<p><a href='turnstyle://eventId/"+event+"'>"+fireChildren[event].name+" - "+fireChildren[event].host+" - "+fireChildren[event].ticketsLeft+"</a></p>";
+          // console.log(fireChildren[event].ticketCost)
+          var row = document.getElementById('ticketTable').insertRow();
+          row.insertCell().innerHTML = fireChildren[event].name;
+          row.insertCell().innerHTML = fireChildren[event].eventDate.substr(0,10);
+          row.insertCell().innerHTML = "$"+fireChildren[event].ticketCost;
+          row.insertCell().innerHTML = fireChildren[event].ticketsLeft;
+          row.insertCell().innerHTML = "<a href='turnstyle://eventId/"+event+"'>Link</a>"
+          row.insertCell().innerHTML = event;
         }
       });
     </script>
